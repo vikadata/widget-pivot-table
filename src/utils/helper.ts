@@ -178,7 +178,7 @@ export const compare = (x: any, y: any): number => {
     const len = Math.min(x.length, y.length);
     for (let i = 0; i < len; i++) {
       const cmp = (isObject(x[i]) && isObject(y[i])) ? 
-        (x[i]?.name ? compare(x[i].name, y[i].name) : compare(x[i].title, y[i].title)) : 
+        ('name' in x[i] ? compare(x[i].name, y[i].name) : compare(x[i].title, y[i].title)) : 
         compare(x[i], y[i]);
       if (cmp !== 0) {
         return cmp;

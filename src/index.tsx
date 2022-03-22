@@ -1,4 +1,5 @@
 import React, { useMemo, FC } from 'react';
+import { Form } from '@vikadata/components';
 import { 
   useCloudStorage, useFields, useSettingsButton, useViewsMeta, initializeWidget, t
 } from '@vikadata/widget-sdk';
@@ -6,7 +7,6 @@ import { PivotTable } from './components';
 import { FormWrapper } from './components/setting/styled';
 import { UI_SCHEMA, FormSchema, useGetDefaultFormData, IFormDataProps } from './model';
 import { Strings } from './utils';
-import { Form } from '@vikadata/components';
 
 const Main: FC = () => {
   const views = useViewsMeta();
@@ -48,9 +48,8 @@ const Main: FC = () => {
           onChange={onFormChange}
           validate={validate}
           liveValidate
-        >
-          <div/>
-        </Form>
+          children={<></>}
+        />
       </FormWrapper>
     </div>
   );

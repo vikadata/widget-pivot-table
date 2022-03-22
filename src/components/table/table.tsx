@@ -13,7 +13,7 @@ import { buildDrillTree, createAggregateFunction, StatType, Strings, serialNumbe
 import { features, useTablePipeline } from 'ali-react-table';
 import { renderer } from './renderer';
 import { CustomBaseTable } from './styled';
-import { DefaultEmptyContent } from './empty_content';
+import { defaultEmptyContent } from './empty_content';
 
 interface ITableProps {
 	formData: IFormDataProps;
@@ -32,7 +32,7 @@ export const generateSubtotalNode = (node: DrillNode) => {
 export const PivotTable: FC<ITableProps> = memo((props) => {
 	const { formData } = props;
 	const { configuration, more } = formData;
-	const { isSummary, rowSortType, columnSortType } = more;
+	const { isSummary, filterInfo,rowSortType, columnSortType } = more;
 	const { rowDimensions, columnDimensions, valueDimensions, viewId } = configuration;
 	const fields = useFields(viewId);
 	const records = useRecords(viewId);
@@ -115,6 +115,7 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
 			rowConfigs, 
 			columnConfigs, 
 			valueConfigs,
+			filterInfo
 		} as ITableBaseProps);
 	}, [rowConfigs, columnConfigs, valueConfigs]);
 
@@ -234,8 +235,8 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
 			}}
 			defaultColumnWidth={150}
 			{...baseTableProps}
-			components={{
-				EmptyContent: DefaultEmptyContent
+			components={{				
+				EmptyContent:  defaultEmptyContent(baseTableProps)
 			}}
 		/>
 	);
