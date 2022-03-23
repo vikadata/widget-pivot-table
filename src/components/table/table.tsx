@@ -223,23 +223,26 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
 		baseTableProps.dataSource.push(totalData);
 	}
 
+	const { columns: finalColumns, dataSource } = baseTableProps
+
   return (
 		<CustomBaseTable
 			style={{
 				borderTop: renderEnable ? 'initial' : `1px solid ${black[200]}`,
 			}}
 			useVirtual={{
-					horizontal: true,
-					vertical: true,
-					header: false,
+				horizontal: true,
+				vertical: true,
+				header: false,
 			}}
 			defaultColumnWidth={150}
 			{...baseTableProps}
 			components={{				
-				EmptyContent:  defaultEmptyContent(
-					(baseTableProps?.columns.length === 1 && baseTableProps?.dataSource.length === 0) 
+				EmptyContent:  defaultEmptyContent({
+					content: (finalColumns.length === 1 && dataSource.length === 0) 
 					? t(Strings.pivot_table_no_data) 
-					: t(Strings.pivot_table_filter_result_is_empty))
+					: t(Strings.pivot_table_filter_result_is_empty)
+				})	
 			}}
 		/>
 	);
