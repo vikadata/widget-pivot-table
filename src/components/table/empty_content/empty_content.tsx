@@ -1,10 +1,7 @@
 import React, { memo } from 'react';
-import { t } from '@vikadata/widget-sdk';
 import { black } from '@vikadata/components';
-import { Strings } from '../../../utils';
-import { BaseTableProps } from 'ali-react-table';
 
-export function defaultEmptyContent(baseTableProps: BaseTableProps) {
+export function defaultEmptyContent(content: any) {
   return memo(() => {
     return (
       <>
@@ -24,7 +21,7 @@ export function defaultEmptyContent(baseTableProps: BaseTableProps) {
             color: black[1000]
           }}
         >
-          {(baseTableProps?.columns.length === 1 && baseTableProps?.dataSource.length === 0) ? t(Strings.pivot_table_no_data) : t(Strings.pivot_table_filter_result_is_empty)}
+          {content}
         </div>
       </>
     );

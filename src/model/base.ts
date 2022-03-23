@@ -147,8 +147,8 @@ export class TableBase {
 
 		if(this.filterInfo){
 			this.filterInfo.forEach(singleFilterInfo => {	
-				if(singleFilterInfo?.fieldId && singleFilterInfo?.filterValue)
-					filteredRecords = filteredRecords.filter(item => item.getCellValueString(singleFilterInfo?.fieldId) === singleFilterInfo?.filterValue)
+				if(singleFilterInfo.fieldId && singleFilterInfo.filterValue)
+					filteredRecords = filteredRecords.filter(item => item.getCellValueString(singleFilterInfo.fieldId) === singleFilterInfo.filterValue)
 			})
 		}
 		

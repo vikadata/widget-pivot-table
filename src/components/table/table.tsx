@@ -236,7 +236,10 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
 			defaultColumnWidth={150}
 			{...baseTableProps}
 			components={{				
-				EmptyContent:  defaultEmptyContent(baseTableProps)
+				EmptyContent:  defaultEmptyContent(
+					(baseTableProps?.columns.length === 1 && baseTableProps?.dataSource.length === 0) 
+					? t(Strings.pivot_table_no_data) 
+					: t(Strings.pivot_table_filter_result_is_empty))
 			}}
 		/>
 	);
