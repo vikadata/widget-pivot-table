@@ -13,7 +13,7 @@ import { buildDrillTree, createAggregateFunction, StatType, Strings, serialNumbe
 import { features, useTablePipeline } from 'ali-react-table';
 import { renderer } from './renderer';
 import { CustomBaseTable } from './styled';
-import { DefaultEmptyContent } from './empty_content';
+import { defaultEmptyContent } from './empty_content';
 
 interface ITableProps {
 	formData: IFormDataProps;
@@ -32,12 +32,12 @@ export const generateSubtotalNode = (node: DrillNode) => {
 export const PivotTable: FC<ITableProps> = memo((props) => {
 	const { formData } = props;
 	const { configuration, more } = formData;
-	const { isSummary, rowSortType, columnSortType } = more;
+	const { isSummary, filterInfo,rowSortType, columnSortType } = more;
 	const { rowDimensions, columnDimensions, valueDimensions, viewId } = configuration;
+
 	const fields = useFields(viewId);
 	const records = useRecords(viewId);
-  const [indicatorSide] = useState('top');
-
+  	const [indicatorSide] = useState('top');
 	const handledValueDimensions = useMemo(() => {
 		return valueDimensions.map((dim, index) => {
 			const fieldId = dim.fieldId;
@@ -115,6 +115,7 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
 			rowConfigs, 
 			columnConfigs, 
 			valueConfigs,
+			filterInfo
 		} as ITableBaseProps);
 	}, [rowConfigs, columnConfigs, valueConfigs]);
 
@@ -222,20 +223,26 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
 		baseTableProps.dataSource.push(totalData);
 	}
 
+	const { columns: finalColumns, dataSource } = baseTableProps
+
   return (
 		<CustomBaseTable
 			style={{
 				borderTop: renderEnable ? 'initial' : `1px solid ${black[200]}`,
 			}}
 			useVirtual={{
-					horizontal: true,
-					vertical: true,
-					header: false,
+				horizontal: true,
+				vertical: true,
+				header: false,
 			}}
 			defaultColumnWidth={150}
 			{...baseTableProps}
-			components={{
-				EmptyContent: DefaultEmptyContent
+			components={{				
+				EmptyContent:  defaultEmptyContent({
+					content: (finalColumns.length === 1 && dataSource.length === 0) 
+					? t(Strings.pivot_table_no_data) 
+					: t(Strings.pivot_table_filter_result_is_empty)
+				})	
 			}}
 		/>
 	);

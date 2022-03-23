@@ -8,6 +8,10 @@
 			"zh_CN": "至少需要选择 1 个行维度、1 个列维度和 1 个统计值才能渲染为透视表",
 			"en_US": "At least one row, one column and one summary value  must be selected to render as a PivotTable"
 		},
+		"pivot_table_filter_result_is_empty": {
+			"zh_CN": "没有数据可以显示， 可以排查下对应视图或筛选条件",
+			"en_US": "No data can be displayed, you can check the corresponding view or filter criteria"
+		},
 		"pivot_settings": {
 			"zh_CN": "透视表配置",
 			"en_US": "Pivot settings"
@@ -175,6 +179,14 @@
 		"pivot_setting_help_url": {
 				"zh_CN": "/help/intro-widget-pivot/",
 				"en_US": "/help/intro-widget-pivot/"
+		},
+		"pivot_filter_info": {
+			"zh_CN": "新增筛选条件（多个筛选按“且”运算）",
+			"en_US": "Add filtering criteria (Logical Conjunction)"
+		},
+		"pivot_equal": {
+			"zh_CN": "等于",
+			"en_US": "is..."
 		}
 	}
 }

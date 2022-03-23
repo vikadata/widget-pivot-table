@@ -29,6 +29,7 @@ export const useGetDefaultFormData = () => {
       },
       more: {
         isSummary: true,
+        filterInfo: [],
         rowSortType: SortType.None,
         columnSortType: SortType.None,
       }
@@ -107,6 +108,39 @@ export const UI_SCHEMA = {
       "ui:options":  {
         showTitle: false,
       },
+    },
+    filterInfo: {
+      "ui:options": {
+        removable: false
+      },
+      items: {
+        "ui:options":  {
+          inline: true,
+          showTitle: false,
+        },
+        fieldId: {
+          'ui:options': {
+            showTitle: false,
+          },
+          'ui:widget': props => <FieldSelect {...props} />,
+        },
+        operatorSymbol: {
+          "ui:rootFieldId": "myForm",
+          'ui:options': {
+            showTitle: false,
+          }
+        },
+        filterValue: {
+          'ui:options': {
+            showTitle: false,
+          }
+        },
+        statType: {
+          'ui:options': {
+            showTitle: false,
+          },
+        },
+      }
     },
     rowSortType: {
       'ui:widget': 'toggleButtonWidget',
