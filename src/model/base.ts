@@ -1,4 +1,4 @@
-import { Field, FieldType, Record } from '@vikadata/widget-sdk';
+import { BasicValueType, Field, FieldType, Record } from '@vikadata/widget-sdk';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
@@ -55,6 +55,12 @@ export const checkNull = (cv) => {
   return cv;
 };
 
+// 检查 DateTime 类型
+export const checkDateTimeType = (field: Field) => {
+  const { entityType, basicValueType } = field;
+  return NEED_FORMAT_DATE_TIME_TYPES.has(entityType) || basicValueType === BasicValueType.DateTime;
+};
+
 // 对 DateTime 类型的数据进行格式化
 export const formatDateTime = (cv: number | number[], format: string) => {
   return [cv].flat().map(value => {
@@ -70,15 +76,15 @@ export const formatDateTime = (cv: number | number[], format: string) => {
  * 根据不同 FieldType 进行值的格式化，
  * 这里直接使用真实的 FieldType 进行判断，以保证格式化的正确性
  */
-export const formatByFieldType = (cellValue, field: ThinField) => { 
+export const formatByFieldType = (cellValue, thinField: ThinField) => { 
   cellValue = checkNull(cellValue);
   if (cellValue == null) return null;
 
-  const { type, entityType, dateTimeFormatter } = field;
+  const { type, entityType, dateTimeFormatter, field } = thinField;
   if (type === FieldType.MagicLookUp && NEED_FORMAT_TEXT_TYPES.has(entityType)) {
     cellValue = cellValue.join(', ');
   }
-  if (NEED_FORMAT_DATE_TIME_TYPES.has(entityType)) {
+  if (checkDateTimeType(field)) {
     cellValue = formatDateTime(cellValue, dateTimeFormatter!);
   }
 
@@ -94,10 +100,10 @@ export const formatByFieldType = (cellValue, field: ThinField) => {
 };
 
 // 统一的取值函数
-export const getCellValue = (record: Record, field: ThinField) => {
-  const { entityType, fieldId } = field;
+export const getCellValue = (record: Record, thinField: ThinField) => {
+  const { fieldId, field } = thinField;
 
-  if (NEED_FORMAT_DATE_TIME_TYPES.has(entityType)) {
+  if (checkDateTimeType(field)) {
     return record._getCellValue(fieldId);
   }
   return record.getCellValue(fieldId);

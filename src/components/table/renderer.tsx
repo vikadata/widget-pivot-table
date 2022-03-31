@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  Field, FieldType, t,
+  Field, FieldType, t, BasicValueType,
   CellAttachment, CellCheckbox, CellEnhanceText, 
   CellLink, CellMember, CellMultiText, CellText, 
 } from '@vikadata/widget-sdk';
@@ -29,7 +29,7 @@ export const renderer = (
   if (value === NOT_EXIST) return '-'; // 记录不存在
   if (COUNT_ALL_VALUES.includes(field.id)) return value;
 
-  const { entityType, fieldData } = field;
+  const { entityType, fieldData, basicValueType } = field;
   const property = fieldData.property;
   let cellValue;
 
@@ -71,9 +71,16 @@ export const renderer = (
     case FieldType.Percent:
     case FieldType.AutoNumber:
     case FieldType.Number:
-    case FieldType.Formula:
     case FieldType.Rating:
       return <CellText text={field.convertCellValueToString(cellValue)} />;	
+    case FieldType.Formula:
+      return (
+        <CellText 
+          text={
+            basicValueType === BasicValueType.DateTime ? cellValue : field.convertCellValueToString(cellValue)
+          }
+        />
+      );
     case FieldType.SingleSelect:
     case FieldType.MultiSelect:
       return (
