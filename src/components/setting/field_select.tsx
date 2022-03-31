@@ -23,12 +23,12 @@ import {
   ColumnLongtextFilled,
   ColumnPhoneFilled,
   ColumnLookupNonzeroFilled,
-  ColumnSingleNonzeroFilled,
+  ColumnSingleNonzeroFilled, 
   ColumnFormulaFilled,
   ColumnCheckboxFilled,
 } from '@vikadata/icons';
 import styled from 'styled-components';
-import { Strings } from "../../utils/i18n";
+import { Strings } from '../../utils/i18n';
 import { COUNT_ALL_VALUE } from '../../model';
 
 const FieldIconMap = {

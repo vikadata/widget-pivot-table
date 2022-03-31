@@ -5,7 +5,7 @@ import { SortType } from '../model';
 import { Strings } from './i18n';
 import { 
   filter, isArray, isNumber, isString, map, max, maxBy, min, minBy, sum, sumBy, uniq, isObject
-} from "lodash";
+} from 'lodash';
 import { NOT_EXIST } from '../components';
 
 export enum StatType {
@@ -131,7 +131,7 @@ export const aggregate = (slice: any[], fieldId: string, statType: StatType = St
     default: 
       return null;
   }
-}
+};
 
 // 对多个维度的数据进行聚合
 export const createAggregateFunction = (fieldDatas: { fieldId: string; statType: StatType; }[]) => {
@@ -140,7 +140,7 @@ export const createAggregateFunction = (fieldDatas: { fieldId: string; statType:
       const { fieldId, statType } = data;
       const result = aggregate(slice, fieldId, statType);
       return { ...prev, ...result };
-    }, {})
+    }, {});
   };
 };
 
@@ -169,9 +169,9 @@ export const compare = (x: any, y: any): number => {
       return -1;
     } else if (x > y) {
       return 1;
-    } else {
-      return 0;
-    }
+    } 
+    return 0;
+    
   }
 
   if (Array.isArray(x) && Array.isArray(y)) {
@@ -192,7 +192,7 @@ export const compare = (x: any, y: any): number => {
     (isObject(x as any) && isObject(y as any)) ? 
       (x?.name ? compare(x.name, y.name) : compare(x.title, y.title)) : 0
   );
-}
+};
 
 // 根据指定的 codes 计算下钻树
 export const buildDrillTree = (
@@ -275,4 +275,4 @@ export const buildDrillTree = (
         })
     );
   }
-}
+};

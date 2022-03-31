@@ -2,11 +2,11 @@ import React, { memo } from 'react';
 import { black } from '@vikadata/components';
 
 interface EmptyContentProps {
-  content: any
+  content: string;
 }
 
 export function defaultEmptyContent(props: EmptyContentProps) {
-  const { content } = props
+  const { content } = props;
   return memo(() => {
     return (
       <>

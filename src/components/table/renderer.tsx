@@ -1,12 +1,13 @@
 import React from 'react';
 import { 
+  Field, FieldType, t,
   CellAttachment, CellCheckbox, CellEnhanceText, 
-  CellLink, CellMember, CellMultiText, CellText, Field, FieldType, t
+  CellLink, CellMember, CellMultiText, CellText, 
 } from '@vikadata/widget-sdk';
-import { StatType, Strings } from "../../utils";
+import { StatType, Strings } from '../../utils';
 import { COUNT_ALL_VALUES, SPLIT_TYPE_MAP } from '../../model';
 import { CellOptions } from './cell_options';
-import { NOT_EXIST } from '../table'
+import { NOT_EXIST } from '../table';
 
 export const ORIGINAL_STAT_TYPE_MAP = new Set([
   StatType.CountAll, 
@@ -131,4 +132,4 @@ export const renderer = (
     default:
       return null;
   }
-}
+};

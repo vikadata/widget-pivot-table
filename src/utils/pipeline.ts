@@ -1,8 +1,8 @@
-import { Field, t } from "@vikadata/widget-sdk";
-import { TablePipeline } from "ali-react-table";
-import { renderer } from "../components";
-import { StatType } from "./helper";
-import { Strings } from "./i18n";
+import { Field, t } from '@vikadata/widget-sdk';
+import { TablePipeline } from 'ali-react-table';
+import { renderer } from '../components';
+import { StatType } from './helper';
+import { Strings } from './i18n';
 
 // 处理列，适配透视表排序
 export const columnHandler = (leftCodes: string[], columnField?: Field) => {
@@ -14,7 +14,7 @@ export const columnHandler = (leftCodes: string[], columnField?: Field) => {
         return {
           ...column,
           getSpanRect: undefined,
-          getCellProps: (value) => ({ style: { fontWeight: 'bold' } }),
+          getCellProps: (value) => ({ style: { fontWeight: 'bold' }}),
         };
       }
   
@@ -36,8 +36,8 @@ export const columnHandler = (leftCodes: string[], columnField?: Field) => {
         title: columnField ? renderer(name, columnField, StatType.None) : name,
         getCellProps: (value) => ({ rowSpan: 1 }),
       };
-    }))
-  }
+    }));
+  };
 };
 
 // 添加序号
@@ -49,9 +49,9 @@ export const serialNumberHandler = () => {
         lock: true,
         width: 60,
         align: 'center',
-				getValue: (row, rowIndex) => rowIndex + 1,
+        getValue: (row, rowIndex) => rowIndex + 1,
       },
       ...cols
-		])
-  }
+    ]);
+  };
 };

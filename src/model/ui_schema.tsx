@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useFields, useViewsMeta, t } from '@vikadata/widget-sdk';
 import { COUNT_ALL_VALUE, DATE_TIME_FORMATTER_TYPES, isNumberType, SortType } from './schema';
-import { FieldSelect } from "../components";
+import { FieldSelect } from '../components';
 import { StatType, Strings } from '../utils';
 
 export const useGetDefaultFormData = () => {
@@ -39,11 +39,11 @@ export const useGetDefaultFormData = () => {
 };
 
 const AXIS_DIMENSIONS_UI_SCHEMA = {
-  "ui:options": {
+  'ui:options': {
     removable: false
   },
   items: {
-    "ui:options":  {
+    'ui:options':  {
       showTitle: false,
       inline: true,
       layout: [['fieldId', 'dateTimeFormatter'], ['isSplitMultipleValue']],
@@ -78,11 +78,11 @@ export const UI_SCHEMA = {
     rowDimensions: AXIS_DIMENSIONS_UI_SCHEMA,
     columnDimensions: AXIS_DIMENSIONS_UI_SCHEMA,
     valueDimensions: {
-      "ui:options": {
+      'ui:options': {
         removable: true
       },
       items: {
-        "ui:options":  {
+        'ui:options':  {
           inline: true,
           showTitle: false,
         },
@@ -101,20 +101,20 @@ export const UI_SCHEMA = {
     },
   },
   more: {
-    "ui:options": {
+    'ui:options': {
       collapse: true,
     },
     isSummary: {
-      "ui:options":  {
+      'ui:options':  {
         showTitle: false,
       },
     },
     filterInfo: {
-      "ui:options": {
+      'ui:options': {
         removable: false
       },
       items: {
-        "ui:options":  {
+        'ui:options':  {
           inline: true,
           showTitle: false,
         },
@@ -125,7 +125,7 @@ export const UI_SCHEMA = {
           'ui:widget': props => <FieldSelect {...props} />,
         },
         operatorSymbol: {
-          "ui:rootFieldId": "myForm",
+          'ui:rootFieldId': 'myForm',
           'ui:options': {
             showTitle: false,
           }

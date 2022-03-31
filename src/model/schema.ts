@@ -1,5 +1,5 @@
-import { BasicValueType, Field, IViewMeta, t } from "@vikadata/widget-sdk";
-import { StatType, Strings } from "../utils";
+import { BasicValueType, Field, IViewMeta, t } from '@vikadata/widget-sdk';
+import { StatType, Strings } from '../utils';
 
 export interface AxisDimensionProps {
   fieldId: string;
@@ -67,7 +67,7 @@ export const NUMBER_FORMAT_TYPES = new Set([
 export const isNumberType = (field: Field) => {
   const { basicValueType, formatType } = field;
   return basicValueType === BasicValueType.Number || (NUMBER_FORMAT_TYPES as any).has(formatType?.type);
-}
+};
 
 export enum EnumType {
   Value = 'Value',
@@ -89,11 +89,11 @@ export const DATE_TIME_FORMATTER_TYPES = [
 ];
 
 export const DATE_TIME_FORMATTER_TYPES_NAMES = [
-  t(Strings.year_month_day_hyphen),                     // '年-月-日',
-  t(Strings.year_week_hyphen),                          // '年-周',
+  t(Strings.year_month_day_hyphen), // '年-月-日',
+  t(Strings.year_week_hyphen), // '年-周',
   t(Strings.label_format_year_and_month_split_by_dash), // '年-月',
-  t(Strings.year_season_hyphen),                        // '年-季度',
-  t(Strings.year),                                      // '年',
+  t(Strings.year_season_hyphen), // '年-季度',
+  t(Strings.year), // '年',
 ];
 
 export const generateFieldEnums = (fields: Field[], enumType: EnumType): string[] => {
@@ -101,7 +101,7 @@ export const generateFieldEnums = (fields: Field[], enumType: EnumType): string[
     return ['', ...fields.map(field => field.id)];
   }
   return [t(Strings.option_blank), ...fields.map(field => field.name)];
-}
+};
 
 export const MAX_ITEMS = 3;
 export const COUNT_ALL_VALUE = 'fldCountAll';
@@ -117,7 +117,7 @@ export class FormSchema {
   views: Pick<IViewMeta, 'id' | 'name'>[];
   fields: Field[];
 
-  constructor (
+  constructor(
     formData: IFormDataProps, 
     views: Pick<IViewMeta, 'id' | 'name'>[],
     fields: Field[],
@@ -322,7 +322,7 @@ export class FormSchema {
   }
 
   getMoreFormJSON() {
-   return { 
+    return { 
       type: 'object',
       title: t(Strings.pivot_more_settings),
       properties: {

@@ -1,0 +1,61 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"@vikadata/eslint-config-vika"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": [
+		"vika",
+		"react",
+		"react-hooks",
+		"@typescript-eslint"
+	],
+	"rules": {
+		"@typescript-eslint/naming-convention": [
+      "warn",
+      {
+        "selector": "enumMember",
+        "format": [
+          "PascalCase",
+          "UPPER_CASE"
+        ]
+      },
+      {
+        "selector": ["interface", "typeLike"],
+        "format": [
+          "PascalCase"
+        ]
+      },
+      {
+        "selector": "variable",
+        "format": [
+          "camelCase",
+          "UPPER_CASE",
+          "PascalCase"
+        ],
+        "leadingUnderscore": "allow", // 变量名以 _ 开头
+        "trailingUnderscore": "forbid" // 变量名以 _ 结尾
+      },
+      {
+        "selector": "parameter",
+        "format": [
+          "camelCase",
+          "PascalCase"
+        ],
+        "leadingUnderscore": "allow"
+      }
+    ]
+	}
+}
