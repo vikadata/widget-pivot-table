@@ -57,7 +57,7 @@ export const checkNull = (cv) => {
 
 // 检查 DateTime 类型
 export const checkDateTimeType = (field: Field) => {
-  const { entityType, basicValueType } = field;
+  const { entityType, basicValueType } = field || {};
   return NEED_FORMAT_DATE_TIME_TYPES.has(entityType) || basicValueType === BasicValueType.DateTime;
 };
 
