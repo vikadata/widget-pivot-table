@@ -55,7 +55,7 @@ export const renderer = (
     case FieldType.SingleText:
       return (
         <CellEnhanceText 
-          text={cellValue} 
+          text={String(cellValue)} 
           cellStyle={{
             wordBreak: 'break-word'
           }}

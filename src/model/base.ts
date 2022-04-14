@@ -81,7 +81,8 @@ export const formatByFieldType = (cellValue, thinField: ThinField) => {
   if (cellValue == null) return null;
 
   const { type, entityType, dateTimeFormatter, field } = thinField;
-  if (type === FieldType.MagicLookUp && NEED_FORMAT_TEXT_TYPES.has(entityType)) {
+  const { basicValueType } = field;
+  if (type === FieldType.MagicLookUp && NEED_FORMAT_TEXT_TYPES.has(entityType) && basicValueType === BasicValueType.String) {
     cellValue = cellValue.join(', ');
   }
   if (checkDateTimeType(field)) {
