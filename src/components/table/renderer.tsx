@@ -8,6 +8,7 @@ import { StatType, Strings } from '../../utils';
 import { COUNT_ALL_VALUES, SPLIT_TYPE_MAP } from '../../model';
 import { CellOptions } from './cell_options';
 import { NOT_EXIST } from '../table';
+import { isArray } from 'lodash';
 
 export const ORIGINAL_STAT_TYPE_MAP = new Set([
   StatType.CountAll, 
@@ -29,7 +30,7 @@ export const renderer = (
   if (value === NOT_EXIST) return '-'; // 记录不存在
   if (COUNT_ALL_VALUES.includes(field.id)) return value;
 
-  const { entityType, fieldData, basicValueType } = field;
+  const { type, entityType, fieldData, basicValueType } = field;
   const property = fieldData.property;
   let cellValue;
 
@@ -40,8 +41,12 @@ export const renderer = (
   }
 
   // 记录为空
-  if (cellValue == null || (SPLIT_TYPE_MAP.has(entityType) && !cellValue?.length)) {
+  if (cellValue == null || (SPLIT_TYPE_MAP.has(entityType) && isArray(cellValue) && !cellValue?.length)) {
     return '-';
+  }
+
+  if (type === FieldType.MagicLookUp && basicValueType === BasicValueType.Number) {
+    return <CellText text={field.convertCellValueToString(cellValue)} />;	
   }
 
   if (ORIGINAL_STAT_TYPE_MAP.has(statType)) {
@@ -94,8 +99,6 @@ export const renderer = (
           }} 
         />
       );
-    // case FieldType.Rating:
-    //   return <CellRating field={property} count={cellValue} />;
     case FieldType.Attachment:
       return <CellAttachment files={cellValue} style={{ justifyContent: 'center' }} />;
     case FieldType.Member:
@@ -116,12 +119,6 @@ export const renderer = (
       );
     case FieldType.Checkbox:
       return <CellCheckbox field={property} checked={cellValue} />;
-    // case FieldType.Phone:
-    //   return <CellPhone value={cellValue} />;
-    // case FieldType.Email:
-    //   return <CellEmail value={cellValue} />;
-    // case FieldType.URL:
-    //   return <CellUrl value={cellValue} />;
     case FieldType.MagicLink:
       return (
         <CellLink 
