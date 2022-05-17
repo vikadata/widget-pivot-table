@@ -5,7 +5,7 @@ import {
 } from '@vikadata/widget-sdk';
 import { PivotTable } from './components';
 import { FormWrapper } from './components/setting/styled';
-import { UI_SCHEMA, FormSchema, useGetDefaultFormData, IFormDataProps } from './model';
+import { FormSchema, useGetDefaultFormData, IFormDataProps, getUiSchema } from './model';
 import { Strings } from './utils';
 
 const Main: FC = () => {
@@ -43,7 +43,7 @@ const Main: FC = () => {
       <FormWrapper openSetting={isSettingOpened} readOnly={!editable}>
         <Form
           formData={formData}
-          uiSchema={UI_SCHEMA}
+          uiSchema={getUiSchema(viewId)}
           schema={schema}
           onChange={onFormChange}
           validate={validate}

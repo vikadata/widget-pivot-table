@@ -1,7 +1,7 @@
 import React from 'react';
 import { WidgetProps } from '@rjsf/core';
 import { applyDefaultTheme, ITheme, Select, IOption, useTheme } from '@vikadata/components';
-import { FieldType, useActiveViewId, Field, useFields, useField, t } from '@vikadata/widget-sdk';
+import { FieldType, Field, useFields, useField, t } from '@vikadata/widget-sdk';
 import {
   ColumnAttachmentFilled,
   ColumnAutonumberFilled,
@@ -85,10 +85,9 @@ const ErrorText = styled.div.attrs(applyDefaultTheme)`
 `;
 
 export const FieldSelect = (props: WidgetProps) => {
-  const { options: { enumOptions }, value: fieldId, onChange, rawErrors } = props;
+  const { viewId, options: { enumOptions }, value: fieldId, onChange, rawErrors } = props;
   const theme = useTheme();
-  const activeViewId = useActiveViewId();
-  const fields = useFields(activeViewId);
+  const fields = useFields(viewId);
   const field = useField(fieldId);
   const _options: IOption[] = transformOptions(enumOptions as any, theme as ITheme, fields);
   const hasError = Boolean(rawErrors?.length);

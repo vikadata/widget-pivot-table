@@ -38,7 +38,7 @@ export const useGetDefaultFormData = () => {
   }, []);
 };
 
-const AXIS_DIMENSIONS_UI_SCHEMA = {
+const getDimensionsUiSchema = (viewId: string) => ({
   'ui:options': {
     removable: false
   },
@@ -52,7 +52,7 @@ const AXIS_DIMENSIONS_UI_SCHEMA = {
       'ui:options': {
         showTitle: false,
       },
-      'ui:widget': props => <FieldSelect {...props} />,
+      'ui:widget': props => <FieldSelect {...props} viewId={viewId} />,
     },
     dateTimeFormatter: {
       'ui:options': {
@@ -65,9 +65,9 @@ const AXIS_DIMENSIONS_UI_SCHEMA = {
       },
     },
   },
-};
+});
 
-export const UI_SCHEMA = {
+export const getUiSchema = (viewId: string) => ({
   'ui:options': {
     help: {
       text: t(Strings.pivot_setting_help_tips),
@@ -75,8 +75,8 @@ export const UI_SCHEMA = {
     },
   },
   configuration: {
-    rowDimensions: AXIS_DIMENSIONS_UI_SCHEMA,
-    columnDimensions: AXIS_DIMENSIONS_UI_SCHEMA,
+    rowDimensions: getDimensionsUiSchema(viewId),
+    columnDimensions: getDimensionsUiSchema(viewId),
     valueDimensions: {
       'ui:options': {
         removable: true
@@ -90,7 +90,7 @@ export const UI_SCHEMA = {
           'ui:options': {
             showTitle: false,
           },
-          'ui:widget': props => <FieldSelect {...props} />,
+          'ui:widget': props => <FieldSelect {...props} viewId={viewId} />,
         },
         statType: {
           'ui:options': {
@@ -149,4 +149,4 @@ export const UI_SCHEMA = {
       'ui:widget': 'toggleButtonWidget',
     }
   }
-};
+});
