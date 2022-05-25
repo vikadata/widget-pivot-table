@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { black } from '@vikadata/components';
+import { useThemeColors } from '@vikadata/components';
 
 interface EmptyContentProps {
   content: string;
@@ -7,6 +7,7 @@ interface EmptyContentProps {
 
 export function defaultEmptyContent(props: EmptyContentProps) {
   const { content } = props;
+  const colors = useThemeColors();
   return memo(() => {
     return (
       <>
@@ -23,7 +24,7 @@ export function defaultEmptyContent(props: EmptyContentProps) {
             minWidth: 210,
             marginTop: 8,
             lineHeight: 1.5,
-            color: black[1000]
+            color: colors.firstLevelText
           }}
         >
           {content}

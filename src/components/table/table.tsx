@@ -6,7 +6,7 @@ import {
   convertDrillTreeToCrossTree,
   CrossTableLeftMetaColumn,
 } from 'ali-react-table/pivot';
-import { black } from '@vikadata/components';
+import { useThemeColors } from '@vikadata/components';
 import { useRecords, t, useFields, FieldType } from '@vikadata/widget-sdk';
 import { COUNT_ALL_NAME, COUNT_ALL_VALUE, COUNT_ALL_VALUES, IFormDataProps, ITableBaseProps, SortType, TableBase } from '../../model';
 import { buildDrillTree, createAggregateFunction, StatType, Strings, serialNumberHandler, columnHandler } from '../../utils';
@@ -34,6 +34,7 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
   const { configuration, more } = formData;
   const { isSummary, filterInfo, rowSortType, columnSortType } = more;
   const { rowDimensions, columnDimensions, valueDimensions, viewId } = configuration;
+  const colors = useThemeColors();
 
   const fields = useFields(viewId);
   const records = useRecords(viewId);
@@ -228,7 +229,7 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
   return (
     <CustomBaseTable
       style={{
-        borderTop: renderEnable ? 'initial' : `1px solid ${black[200]}`,
+        borderTop: renderEnable ? 'initial' : `1px solid ${colors.lineColor}`,
       }}
       useVirtual={{
         horizontal: true,

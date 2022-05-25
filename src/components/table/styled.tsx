@@ -1,16 +1,24 @@
 import React from 'react';
 import cx from 'classnames';
-import styled from 'styled-components';
-import { black, blackBlue } from '@vikadata/components';
+import styled, { css } from 'styled-components';
 import { BaseTable, BaseTableProps } from 'ali-react-table';
+import { useThemeColors, ThemeName, deepPurple } from '@vikadata/components';
+import { useMeta } from '@vikadata/widget-sdk';
 
 const ThemeBaseTable: any = styled(BaseTable)`
   &.vikaTable {
-    --header-color: ${black[1000]};
-    --header-bgcolor: ${black[100]};
-    --header-hover-bgcolor: ${blackBlue[100]};
-    --hover-bgcolor: ${blackBlue[100]};
-    --border-color: ${black[200]};
+    ${props => {
+      const { headerColor, borderColor, fontColor, bgColor, hoverBgColor } = props.colorConfig;
+      return css`
+        --border-color: ${borderColor};
+        --header-bgcolor: ${headerColor};
+        --header-color: ${fontColor};
+        --color: ${fontColor};
+        --bgcolor: ${bgColor};
+        --header-hover-bgcolor: ${hoverBgColor};
+        --hover-bgcolor: ${hoverBgColor};
+      `;
+    }}
     --font-size: 13px;
     user-select: none;
   }
@@ -20,5 +28,23 @@ const ThemeBaseTable: any = styled(BaseTable)`
 `;
 
 export const CustomBaseTable = React.forwardRef<BaseTable, BaseTableProps>((props, ref) => {
-  return <ThemeBaseTable ref={ref} className={cx({ vikaTable: true })} {...props} />;
+  const meta = useMeta();
+  const colors = useThemeColors();
+  const themeName = meta.theme;
+  // console.log('meta', meta.theme, ThemeName.Light)
+
+  return (
+    <ThemeBaseTable 
+      ref={ref} 
+      className={cx({ vikaTable: true })} 
+      colorConfig={{
+        headerColor: colors.lowestBg,
+        borderColor: colors.lineColor,
+        fontColor: colors.firstLevelText,
+        bgColor: colors.defaultBg,
+        hoverBgColor: themeName === ThemeName.Dark ? '#393649' : deepPurple[50]
+      }}
+      {...props} 
+    />
+  );
 });
