@@ -32,7 +32,7 @@ export const generateSubtotalNode = (node: DrillNode) => {
 export const PivotTable: FC<ITableProps> = memo((props) => {
   const { formData } = props;
   const { configuration, more } = formData;
-  const { isSummary, filterInfo, rowSortType, columnSortType } = more;
+  const { isSummary, rowSortType, columnSortType } = more;
   const { rowDimensions, columnDimensions, valueDimensions, viewId } = configuration;
   const colors = useThemeColors();
 
@@ -116,9 +116,8 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
       rowConfigs, 
       columnConfigs, 
       valueConfigs,
-      filterInfo
     } as ITableBaseProps);
-  }, [rowConfigs, columnConfigs, valueConfigs, filterInfo]);
+  }, [rowConfigs, columnConfigs, valueConfigs]);
 
   const data = useMemo(() => tableConfig.getData(records), [tableConfig, records]);
 

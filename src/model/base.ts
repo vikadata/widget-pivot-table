@@ -30,7 +30,6 @@ export interface ITableBaseProps {
   rowConfigs: ThinField[];
   columnConfigs: ThinField[];
   valueConfigs: ThinField[];
-  filterInfo: FilterType[]
 }
 
 export const NEED_FORMAT_TEXT_TYPES = new Set([
@@ -124,13 +123,11 @@ export class TableBase {
   private rowConfigs: ThinField[];
   private columnConfigs: ThinField[];;
   private valueConfigs: ThinField[];
-  private filterInfo: FilterType[];
 
   constructor(props: ITableBaseProps) {
     this.rowConfigs = props.rowConfigs;
     this.columnConfigs = props.columnConfigs;
     this.valueConfigs = props.valueConfigs;
-    this.filterInfo = props.filterInfo;
   }
 
   // 检查值是否有效
@@ -153,19 +150,7 @@ export class TableBase {
     const isColumnSplitMultipleValue = _isColumnSplitMultipleValue && SPLIT_TYPE_MAP.has(columnFieldType);
     const resultData: any[] = [];
     
-    // 在这里筛选数据
-    // 1. 拿到schema筛选配置（filterInfo）的数组
-    // 2. 遍历数组，取出fieldId和filterValue
-    let filteredRecords = [...records];
-
-    if(this.filterInfo){
-      this.filterInfo.forEach(singleFilterInfo => {	
-        if(singleFilterInfo.fieldId && singleFilterInfo.filterValue)
-          filteredRecords = filteredRecords.filter(item => item.getCellValueString(singleFilterInfo.fieldId) === singleFilterInfo.filterValue);
-      });
-    }
-    
-    filteredRecords.forEach(record => {
+    records.forEach(record => {
       const valueFieldData = {};
       this.valueConfigs.forEach((thinField) => {
         const { fieldId } = thinField;

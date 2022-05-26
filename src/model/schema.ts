@@ -12,12 +12,6 @@ export interface ValueDimensionProps {
   statType: StatType;
 }
 
-export interface FilterInfoType {
-  operatorSymbol: string;
-  fieldId: string;
-  filterValue: string;
-}
-
 export interface IFormDataProps {
   configuration: {
     viewId: string;
@@ -27,7 +21,6 @@ export interface IFormDataProps {
   };
   more: {
     isSummary: boolean;
-    filterInfo: FilterInfoType[];
     rowSortType: SortType;
     columnSortType: SortType;
   }
@@ -330,34 +323,6 @@ export class FormSchema {
           type: 'boolean',
           title: t(Strings.pivot_summary_option),
           description: t(Strings.pivot_summary_option)
-        },
-        filterInfo: {
-          type: 'array',
-          title: t(Strings.pivot_filter_info),
-          minItems: 0,
-          maxItems: 5,
-          uniqueItems: false,
-          items: {
-            type: 'object',
-            required: false,
-            properties: {
-              fieldId: {
-                type: 'string',
-                enum: this.fields.map(field => field.id),
-                enumNames: this.fields.map(field => field.name),
-              },
-              operatorSymbol: {
-                type: 'string',
-                enum: ['='],
-                enumNames: [t(Strings.pivot_equal)],
-                default: '='
-              },
-              filterValue: {
-                type: 'string',
-              }
-            }
-            
-          },
         },
         rowSortType: {
           type: 'string',
