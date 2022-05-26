@@ -110,7 +110,7 @@ export const aggregate = (slice: any[], fieldId: string, statType: StatType = St
       const totalValue = isTotal ? sumBy(slice, (o) => o[totalValueProp]) : sumBy(slice, (o) => isArray(o[fieldId]) ? sum(o[fieldId]) : o[fieldId]);
       const totalCount = isTotal ? sumBy(slice, (o) => o[totalCountProp]) : sumBy(slice, (o) => isArray(o[fieldId]) ? o[fieldId].length : 1);
       return {
-        [fieldId]: Math.round(totalValue / totalCount),
+        [fieldId]: totalValue / totalCount,
         [totalValueProp]: totalValue,
         [totalCountProp]: totalCount,
         [recordFlagProp]: true
