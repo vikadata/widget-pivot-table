@@ -8,7 +8,7 @@ export const useGetDefaultFormData = () => {
   const views = useViewsMeta();
   const viewId = views[0].id;
   const fields = useFields(viewId);
-  const rowFieldId = fields[0].id || '';
+  const rowFieldId = fields[0]?.id || '';
   const columnFieldId = fields[1]?.id || '';
   const valueFieldId = fields.filter(field => {
     const { id } = field;
