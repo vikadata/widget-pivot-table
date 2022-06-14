@@ -31,7 +31,6 @@ export const CustomBaseTable = React.forwardRef<BaseTable, BaseTableProps>((prop
   const meta = useMeta();
   const colors = useThemeColors();
   const themeName = meta.theme;
-  // console.log('meta', meta.theme, ThemeName.Light)
 
   return (
     <ThemeBaseTable 
