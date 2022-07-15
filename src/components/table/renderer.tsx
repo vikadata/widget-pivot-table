@@ -101,7 +101,11 @@ export const renderer = (
         />
       );
     case FieldType.Attachment:
-      return <CellAttachment files={cellValue} style={{ justifyContent: 'center' }} />;
+      return (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <CellAttachment files={cellValue} style={{ overflow: 'hidden' }} />
+        </div>
+      );
     case FieldType.Member:
     case FieldType.LastModifiedBy:
     case FieldType.CreatedBy:
