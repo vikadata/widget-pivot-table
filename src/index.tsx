@@ -1,7 +1,7 @@
 import React, { useMemo, FC } from 'react';
 import { Form } from '@vikadata/components';
 import { 
-  useCloudStorage, useFields, useSettingsButton, useViewsMeta, initializeWidget, t
+  useCloudStorage, useFields, useSettingsButton, useViewsMeta, initializeWidget, t, useMeta, RuntimeEnv
 } from '@vikadata/widget-sdk';
 import { PivotTable } from './components';
 import { FormWrapper } from './components/setting/styled';
@@ -10,6 +10,7 @@ import { Strings } from './utils';
 
 const Main: FC = () => {
   const views = useViewsMeta();
+  const { runtimeEnv } = useMeta();
   const [isSettingOpened] = useSettingsButton();
   const defaultFormData = useGetDefaultFormData();
   const [formData, setFormData, editable] = useCloudStorage('FormData', defaultFormData);
@@ -40,7 +41,7 @@ const Main: FC = () => {
           <PivotTable formData={formData} />
         </div>
       </div>
-      <FormWrapper openSetting={isSettingOpened} readOnly={!editable}>
+      <FormWrapper openSetting={runtimeEnv == RuntimeEnv.Desktop && isSettingOpened} readOnly={!editable}>
         <Form
           formData={formData}
           uiSchema={getUiSchema(viewId)}
