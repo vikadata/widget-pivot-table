@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Field, FieldType, t, BasicValueType,
   CellAttachment, CellCheckbox, CellEnhanceText, 
-  CellMember, CellMultiText, CellText
+  CellMultiText, CellText
 } from '@vikadata/widget-sdk';
 import { StatType, Strings } from '../../utils';
 import { COUNT_ALL_VALUES, SPLIT_TYPE_MAP } from '../../model';
@@ -10,6 +10,7 @@ import { CellOptions } from './cell_options';
 import { NOT_EXIST } from '../table';
 import { isArray } from 'lodash';
 import { CellLink } from './cell_link';
+import { CellMember } from './cell_member';
 
 export const ORIGINAL_STAT_TYPE_MAP = new Set([
   StatType.CountAll, 
@@ -110,23 +111,13 @@ export const renderer = (
     case FieldType.LastModifiedBy:
     case FieldType.CreatedBy:
       return (
-        <CellMember 
-          members={cellValue} 
-          style={{ 
-            justifyContent: 'center', 
-            flexWrap: 'wrap', 
-            fontWeight: 'normal',
-          }} 
-          cellStyle={{
-            maxWidth: '100%'
-          }}
-        />
+        <CellMember cellValue={cellValue} />
       );
     case FieldType.Checkbox:
       return <CellCheckbox field={property} checked={cellValue} />;
     case FieldType.MagicLink:
       return (
-        <CellLink cellValue={cellValue}/>
+        <CellLink cellValue={cellValue} />
       );
     default:
       return null;
