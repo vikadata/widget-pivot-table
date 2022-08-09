@@ -20,7 +20,7 @@ const ThemeBaseTable: any = styled(BaseTable)`
       `;
     }}
     --font-size: 13px;
-    user-select: none;
+    cursor: auto;
   }
   .art-table-header-cell {
     font-weight: bold;
