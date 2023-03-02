@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-// TODO：后续做成可拉伸的形式
+// TODO：Backward compatible stretchable
 export const FormWrapper = styled.div<{ openSetting: boolean, readOnly: boolean }>`
   box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.1), 0px -1px 0px #F0F0F6;
   width: 320px;

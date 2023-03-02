@@ -5,8 +5,7 @@
 	},
 	"extends": [
 		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"@vikadata/eslint-config-vika"
+		"plugin:@typescript-eslint/recommended"
 	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
@@ -17,7 +16,6 @@
 		"sourceType": "module"
 	},
 	"plugins": [
-		"vika",
 		"react",
 		"react-hooks",
 		"@typescript-eslint"
@@ -45,8 +43,8 @@
           "UPPER_CASE",
           "PascalCase"
         ],
-        "leadingUnderscore": "allow", // 变量名以 _ 开头
-        "trailingUnderscore": "forbid" // 变量名以 _ 结尾
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "forbid"
       },
       {
         "selector": "parameter",

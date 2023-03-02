@@ -1,8 +1,8 @@
 import React, { useMemo, FC } from 'react';
-import { Form } from '@vikadata/components';
+import { Form } from '@apitable/components';
 import { 
   useCloudStorage, useFields, useSettingsButton, useViewsMeta, initializeWidget, t, useMeta, RuntimeEnv
-} from '@vikadata/widget-sdk';
+} from '@apitable/widget-sdk';
 import { PivotTable } from './components';
 import { FormWrapper } from './components/setting/styled';
 import { FormSchema, useGetDefaultFormData, IFormDataProps, getUiSchema } from './model';

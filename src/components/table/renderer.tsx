@@ -3,7 +3,7 @@ import {
   Field, FieldType, t, BasicValueType,
   CellAttachment, CellCheckbox, CellEnhanceText, 
   CellMultiText, CellText
-} from '@vikadata/widget-sdk';
+} from '@apitable/widget-sdk';
 import { StatType, Strings } from '../../utils';
 import { COUNT_ALL_VALUES, SPLIT_TYPE_MAP } from '../../model';
 import { CellOptions } from './cell_options';
@@ -29,7 +29,7 @@ export const renderer = (
   parseFn: Function = (value) => JSON.parse(value)
 ) => {
   if ([t(Strings.pivot_totals), t(Strings.pivot_subtotals)].includes(value)) return value;
-  if (value === NOT_EXIST) return '-'; // 记录不存在
+  if (value === NOT_EXIST) return '-'; // Record does not exist
   if (COUNT_ALL_VALUES.includes(field.id)) return value;
 
   const { type, entityType, fieldData, basicValueType } = field;
@@ -42,7 +42,7 @@ export const renderer = (
     console.log(e);
   }
 
-  // 记录为空
+  // Record is empty
   if (cellValue == null || (SPLIT_TYPE_MAP.has(entityType) && isArray(cellValue) && !cellValue?.length)) {
     return '-';
   }

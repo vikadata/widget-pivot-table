@@ -6,8 +6,8 @@ import {
   convertDrillTreeToCrossTree,
   CrossTableLeftMetaColumn,
 } from 'ali-react-table/pivot';
-import { useThemeColors } from '@vikadata/components';
-import { useRecords, t, useFields, FieldType } from '@vikadata/widget-sdk';
+import { useThemeColors } from '@apitable/components';
+import { useRecords, t, useFields, FieldType } from '@apitable/widget-sdk';
 import { COUNT_ALL_NAME, COUNT_ALL_VALUE, COUNT_ALL_VALUES, IFormDataProps, ITableBaseProps, SortType, TableBase } from '../../model';
 import { buildDrillTree, createAggregateFunction, StatType, Strings, serialNumberHandler, columnHandler } from '../../utils';
 import { features, useTablePipeline } from 'ali-react-table';
@@ -19,7 +19,7 @@ interface ITableProps {
 	formData: IFormDataProps;
 }
 
-// 记录不存在
+// Record does not exist
 export const NOT_EXIST = Symbol('notExist');
 
 export const generateSubtotalNode = (node: DrillNode) => {
@@ -83,7 +83,7 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
     }).filter(Boolean);
   }, [columnDimensions, fields]);
 
-  // 由于 valueFields 返回的顺序与 valueFieldIds 不一致，此处再次进行排序
+  // Because the order returned by valueFields does not match the valueFieldIds, it is sorted again
   const valueConfigs = useMemo(() => {
     return handledValueDimensions.map((dim) => {
       const { fieldId, statType } = dim;
@@ -131,11 +131,11 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
     return indicators.filter((ind) => !ind.hidden);
   }, [tableConfig]);
 
-  // 获取顶部、左侧指标
+  // Get top and left indicators
   const leftCodes = useMemo(() => rowDimensions.map(d => d.fieldId).filter(Boolean), [rowDimensions]);
   const topCodes = useMemo(() => columnDimensions.map(d => d.fieldId).filter(Boolean), [columnDimensions]);
 
-  // 生成聚合函数
+  // Generate aggregation function
   const aggregate = useMemo(() => {
     const handledDimensions = handledValueDimensions.map(({ fieldId, statType }, index) => {
       return { 
@@ -146,31 +146,31 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
     return createAggregateFunction(handledDimensions);
   }, [handledValueDimensions]);
 
-  // 生成左侧下钻树
+  // Generate left side drill-down tree
   const leftDrillTree = useMemo(() => buildDrillTree(data, leftCodes, {
     includeTopWrapper: true,
     sortType: rowSortType
   }), [data, leftCodes, rowSortType]);
 
-  // 将生成的下钻树转化为透视表的 leftTree
+  // Convert the generated drill-down tree into the leftTree of the pivot table
   const [leftTreeRoot] = useMemo(() => convertDrillTreeToCrossTree(leftDrillTree, {
     indicators: indicatorSide === 'left' ? visibleIndicators : undefined,
     generateSubtotalNode: isSummary ? generateSubtotalNode : undefined,
   }), [leftDrillTree, indicatorSide, visibleIndicators, isSummary]);
 
-  // 生成顶部下钻树
+  // Generate top-down drill tree
   const topDrillTree = useMemo(() => buildDrillTree(data, topCodes, {
     includeTopWrapper: true,
     sortType: columnSortType,
   }), [data, topCodes, columnSortType]);
 
-  // 将生成的下钻树转化为透视表的 topTree
+  // Convert the generated drill-down tree into a pivot table topTree
   const [topTreeRoot] = useMemo(() => convertDrillTreeToCrossTree(topDrillTree, {
     indicators: indicatorSide === 'top' ? visibleIndicators : undefined,
     generateSubtotalNode: isSummary ? generateSubtotalNode : undefined,
   }), [topDrillTree, indicatorSide, visibleIndicators, isSummary]);
 
-  // 构建数据立方
+  // Build matrix
   const matrix = useMemo(() => buildRecordMatrix({
     data,
     leftCodes,
@@ -182,7 +182,7 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
 
   const renderEnable = Boolean(data.length && (leftTreeRoot.children?.length || topTreeRoot.children?.length));
 
-  // 构建透视表的数据源
+  // Build pivot table data source
   const { dataSource: draftDataSource, columns } = buildCrossTable({
     leftTree: leftTreeRoot.children || [],
     topTree: topTreeRoot.children || [],
@@ -203,7 +203,7 @@ export const PivotTable: FC<ITableProps> = memo((props) => {
 
   const totalData = isSummary ? draftDataSource.pop() : undefined;
 
-  // 利用 pipeline 进行能力拓展
+  // Capability expansion with pipeline
   const pipeline = useTablePipeline({})
     .input({ dataSource: draftDataSource, columns })
     .use(columnHandler(leftCodes, columnConfigs[0]?.field))

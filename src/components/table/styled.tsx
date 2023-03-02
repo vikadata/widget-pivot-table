@@ -2,11 +2,11 @@ import React from 'react';
 import cx from 'classnames';
 import styled, { css } from 'styled-components';
 import { BaseTable, BaseTableProps } from 'ali-react-table';
-import { useThemeColors, ThemeName, deepPurple } from '@vikadata/components';
-import { useMeta } from '@vikadata/widget-sdk';
+import { useThemeColors, ThemeName, deepPurple } from '@apitable/components';
+import { useMeta } from '@apitable/widget-sdk';
 
 const ThemeBaseTable: any = styled(BaseTable)`
-  &.vikaTable {
+  &.apiTable {
     ${props => {
       const { headerColor, borderColor, fontColor, bgColor, hoverBgColor } = props.colorConfig;
       return css`
@@ -35,7 +35,7 @@ export const CustomBaseTable = React.forwardRef<BaseTable, BaseTableProps>((prop
   return (
     <ThemeBaseTable 
       ref={ref} 
-      className={cx({ vikaTable: true })} 
+      className={cx({ apiTable: true })} 
       colorConfig={{
         headerColor: colors.lowestBg,
         borderColor: colors.lineColor,

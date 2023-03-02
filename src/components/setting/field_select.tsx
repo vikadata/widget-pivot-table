@@ -1,7 +1,7 @@
 import React from 'react';
 import { WidgetProps } from '@rjsf/core';
-import { applyDefaultTheme, ITheme, Select, IOption, useTheme } from '@vikadata/components';
-import { FieldType, Field, useFields, useField, t } from '@vikadata/widget-sdk';
+import { applyDefaultTheme, ITheme, Select, IOption, useTheme } from '@apitable/components';
+import { FieldType, Field, useFields, useField, t } from '@apitable/widget-sdk';
 import {
   ColumnAttachmentFilled,
   ColumnAutonumberFilled,
@@ -26,7 +26,7 @@ import {
   ColumnSingleNonzeroFilled, 
   ColumnFormulaFilled,
   ColumnCheckboxFilled,
-} from '@vikadata/icons';
+} from '@apitable/icons';
 import styled from 'styled-components';
 import { Strings } from '../../utils/i18n';
 import { COUNT_ALL_VALUE } from '../../model';
@@ -57,7 +57,6 @@ const FieldIconMap = {
   [FieldType.LastModifiedBy]: ColumnLastmodifiedbyFilled,
 };
 
-// curIndex - 当前组件处于数组中的第几个
 const transformOptions = (enumOptions: { label: string, value: any }[], theme: ITheme, fields: Field[]) => {
   const fieldMap = new Map(fields.map(field => [field.id, field]));
   return enumOptions.map(option => {

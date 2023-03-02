@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useFields, useViewsMeta, t } from '@vikadata/widget-sdk';
+import { useFields, useViewsMeta, t } from '@apitable/widget-sdk';
 import { COUNT_ALL_VALUE, DATE_TIME_FORMATTER_TYPES, isNumberType, SortType } from './schema';
 import { FieldSelect } from '../components';
 import { StatType, Strings } from '../utils';
@@ -19,7 +19,7 @@ export const useGetDefaultFormData = () => {
     );
   })[0]?.id || COUNT_ALL_VALUE;
 
-  // 默认表单配置
+  // Default form configuration
   return useCallback(() => {
     return {
       configuration: {

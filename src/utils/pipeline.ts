@@ -1,15 +1,15 @@
-import { Field, t } from '@vikadata/widget-sdk';
+import { Field, t } from '@apitable/widget-sdk';
 import { TablePipeline } from 'ali-react-table';
 import { renderer } from '../components';
 import { StatType } from './helper';
 import { Strings } from './i18n';
 
-// 处理列，适配透视表排序
+// Handling columns, adapting pivot table sorting
 export const columnHandler = (leftCodes: string[], columnField?: Field) => {
   return (pipeline: TablePipeline) => {
     return pipeline.mapColumns((cols) => cols.map((column, index) => {
       const { columnType, name } = column as any;
-      // 左侧维度为空时，对列数据做处理
+      // When the left dimension is empty, do the processing of the column data
       if (columnType === 'left' && leftCodes.length) {
         return {
           ...column,
@@ -21,7 +21,7 @@ export const columnHandler = (leftCodes: string[], columnField?: Field) => {
       let children;
   
       if (column?.children) {
-        // 构造不同的 code，供排序使用
+        // Constructing different codes for sorting
         children = column.children.map((data, innerIndex) => {
           return { 
             ...data, 
@@ -40,7 +40,7 @@ export const columnHandler = (leftCodes: string[], columnField?: Field) => {
   };
 };
 
-// 添加序号
+// Add serial number
 export const serialNumberHandler = () => {
   return (pipeline: TablePipeline) => {
     return pipeline.mapColumns((cols) => [

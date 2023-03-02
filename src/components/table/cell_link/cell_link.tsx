@@ -1,6 +1,6 @@
 import React from 'react';
-import { useThemeColors } from '@vikadata/components';
-import { CellLink as CellLinkComponent } from '@vikadata/widget-sdk';
+import { useThemeColors } from '@apitable/components';
+import { CellLink as CellLinkComponent } from '@apitable/widget-sdk';
 
 export const CellLink = (props) => {
   const { cellValue } = props;

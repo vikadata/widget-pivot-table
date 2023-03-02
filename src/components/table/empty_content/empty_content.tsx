@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { useThemeColors } from '@vikadata/components';
+import { useThemeColors } from '@apitable/components';
 
 interface EmptyContentProps {
   content: string;
@@ -13,7 +13,7 @@ export function defaultEmptyContent(props: EmptyContentProps) {
       <>
         <img 
           alt="empty-image" 
-          src="//s1.vika.cn/space/2022/02/16/7f9dca59465c4ac8be91dbbf1ab4abad?attname=default_pivot.png" 
+          src="https://legacy-s1.apitable.com/space/2022/12/22/0357ee4370a24c4fa5987826ba52e11f?attname=image.png"
           style={{
             width: 160,
             height: 120

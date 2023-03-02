@@ -1,4 +1,4 @@
-import { BasicValueType, Field, IViewMeta, t } from '@vikadata/widget-sdk';
+import { BasicValueType, Field, IViewMeta, t } from '@apitable/widget-sdk';
 import { StatType, Strings } from '../utils';
 
 export interface AxisDimensionProps {
@@ -72,7 +72,7 @@ export enum AxisDimensionType {
   Row = 'Row'
 }
 
-// 日期格式化类型
+// Date formatting type
 export const DATE_TIME_FORMATTER_TYPES = [
   'YYYY-MM-DD',
   'YYYY-[W]ww',
@@ -82,11 +82,11 @@ export const DATE_TIME_FORMATTER_TYPES = [
 ];
 
 export const DATE_TIME_FORMATTER_TYPES_NAMES = [
-  t(Strings.year_month_day_hyphen), // '年-月-日',
-  t(Strings.year_week_hyphen), // '年-周',
-  t(Strings.label_format_year_and_month_split_by_dash), // '年-月',
-  t(Strings.year_season_hyphen), // '年-季度',
-  t(Strings.year), // '年',
+  t(Strings.year_month_day_hyphen),
+  t(Strings.year_week_hyphen),
+  t(Strings.label_format_year_and_month_split_by_dash),
+  t(Strings.year_season_hyphen),
+  t(Strings.year),
 ];
 
 export const generateFieldEnums = (fields: Field[], enumType: EnumType): string[] => {
@@ -100,7 +100,7 @@ export const MAX_ITEMS = 3;
 export const COUNT_ALL_VALUE = 'fldCountAll';
 export const COUNT_ALL_NAME = t(Strings.value_field_count_all);
 
-// 在 fieldIds 中插入「记录总数」虚拟列，以此构造透视表的数据
+// Insert a "Total Records" dummy column in fieldIds to construct the data for the pivot table
 export const COUNT_ALL_VALUES = Array.from({ length: MAX_ITEMS }, (_, index) => {
   return `${COUNT_ALL_VALUE}_${index}`;
 });
@@ -120,7 +120,7 @@ export class FormSchema {
     this.fields = fields;
   }
 
-  // 获取 Form Schema
+  // Get Form Schema
   getSchema() {
     return {
       type: 'object',

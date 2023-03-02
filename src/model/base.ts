@@ -1,4 +1,4 @@
-import { BasicValueType, Field, FieldType, Record } from '@vikadata/widget-sdk';
+import { BasicValueType, Field, FieldType, Record } from '@apitable/widget-sdk';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
@@ -43,10 +43,10 @@ export const NEED_FORMAT_DATE_TIME_TYPES = new Set([
   FieldType.LastModifiedTime,
 ]);
 
-// 统一格式化函数
+// Unified Formatting Function
 export const defaultFormatFn = (cv) => JSON.stringify(cv);
 
-// 检查是否为空值
+// Check if the value is null
 export const checkNull = (cv) => {
   if (cv == null) return null;
   if (isArray(cv)) cv = cv.flat().filter(v => v);
@@ -54,13 +54,13 @@ export const checkNull = (cv) => {
   return cv;
 };
 
-// 检查 DateTime 类型
+// Check the DateTime type
 export const checkDateTimeType = (field: Field) => {
   const { entityType, basicValueType } = field || {};
   return NEED_FORMAT_DATE_TIME_TYPES.has(entityType) || basicValueType === BasicValueType.DateTime;
 };
 
-// 对 DateTime 类型的数据进行格式化
+// Formatting data of DateTime type
 export const formatDateTime = (cv: number | number[], format: string) => {
   return [cv].flat().map(value => {
     const dateTime = dayjs(value);
@@ -72,8 +72,8 @@ export const formatDateTime = (cv: number | number[], format: string) => {
 };
 
 /**
- * 根据不同 FieldType 进行值的格式化，
- * 这里直接使用真实的 FieldType 进行判断，以保证格式化的正确性
+ * Formatting of values according to different FieldType.
+ * Here the real FieldType is used directly to make sure the formatting is correct.
  */
 export const formatByFieldType = (cellValue, thinField: ThinField) => { 
   cellValue = checkNull(cellValue);
@@ -106,7 +106,7 @@ export const formatByFieldType = (cellValue, thinField: ThinField) => {
   }
 };
 
-// 统一的取值函数
+// Uniform get cellvalue function
 export const getCellValue = (record: Record, thinField: ThinField) => {
   const { fieldId, field } = thinField;
 
@@ -134,7 +134,7 @@ export class TableBase {
     this.valueConfigs = props.valueConfigs;
   }
 
-  // 检查值是否有效
+  // Check if the value is valid
   private checkValid() {
     return (
       this.rowConfigs.filter(v => v.field).length || 
@@ -142,7 +142,7 @@ export class TableBase {
     ) && this.valueConfigs.filter(v => v.fieldId).length;
   }
 
-  // 获取数据源
+  // Get data source
   getData(records: Record[]) {
     if (!this.checkValid()) return [];
 
@@ -161,7 +161,7 @@ export class TableBase {
         valueFieldData[fieldId] = COUNT_ALL_VALUES.includes(fieldId) ? 1 : getCellValue(record, thinField);
       });
 
-      // 行、列维度都进行多选值分离
+      // Multiple choice value separation for both row and column dimensions
       if (isRowSplitMultipleValue && isColumnSplitMultipleValue) {
         const rowCellValue = getCellValue(record, rowField);
         const columnCellValue = getCellValue(record, columnField);
@@ -177,7 +177,7 @@ export class TableBase {
         });
       }
 
-      // 行维度进行多选值分离
+      // Row dimension for multiple choice value separation
       if (isRowSplitMultipleValue) {
         const rowCellValue = getCellValue(record, rowField);
 
@@ -190,7 +190,7 @@ export class TableBase {
         });
       }
 
-      // 列维度进行多选值分离
+      // Column dimension for multiple choice value separation
       if (isColumnSplitMultipleValue) {
         const columnCellValue = getCellValue(record, columnField);
 
@@ -203,7 +203,7 @@ export class TableBase {
         });
       }
 
-      // 无多选值分离情况
+      // No multiple choice value separation case
       return resultData.push({
         [rowFieldId]: formatByFieldType(getCellValue(record, rowField), this.rowConfigs[0]),
         [columnFieldId]: formatByFieldType(getCellValue(record, columnField), this.columnConfigs[0]),
@@ -213,7 +213,7 @@ export class TableBase {
     return resultData;
   }
 
-  // 获取指标数值
+  // Get indicator values
   getIndicators(renderer: Function) {
     if (!this.checkValid()) return [];
     return this.valueConfigs.map(({ fieldId, name, field, statType = StatType.None }) => {
@@ -231,7 +231,7 @@ export class TableBase {
     }).filter(Boolean) as any[];
   }
 
-  // 获取各维度信息
+  // Get information on each dimension
   getDimensions(renderer: Function) {
     if (!this.checkValid()) return [];
     const rowDimensions = this.rowConfigs.map(({ fieldId, name, field }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useThemeColors } from '@vikadata/components';
-import { CellMember as CellMemberComponent } from '@vikadata/widget-sdk';
+import { useThemeColors } from '@apitable/components';
+import { CellMember as CellMemberComponent } from '@apitable/widget-sdk';
 
 export const CellMember = (props) => {
   const { cellValue } = props;

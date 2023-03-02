@@ -1,4 +1,4 @@
-import { t } from '@vikadata/widget-sdk';
+import { t } from '@apitable/widget-sdk';
 import { groupBy2 } from 'ali-react-table';
 import { DrillNode, simpleEncode } from 'ali-react-table/dist/ali-react-table-pivot';
 import { SortType } from '../model';
@@ -133,7 +133,7 @@ export const aggregate = (slice: any[], fieldId: string, statType: StatType = St
   }
 };
 
-// 对多个维度的数据进行聚合
+// Aggregation of data across multiple dimensions
 export const createAggregateFunction = (fieldDatas: { fieldId: string; statType: StatType; }[]) => {
   return (slice: any[]) => {
     return fieldDatas.reduce((prev, data) => {
@@ -145,12 +145,11 @@ export const createAggregateFunction = (fieldDatas: { fieldId: string; statType:
 };
 
 /**
- * 比较函数，支持字符串、数字、数组和 null
- * 1. 对于字符串将比较两者的字典顺序
- * 2. 对于数字将比较两者大小
- * 3. null 值在比较时总是小于另一个值
- * 4. 对于数组，会逐个比较数组中的元素，第一个不相等的比较结果将作为整个数组的比较结果
- * @prop 取对应字段值进行排序
+ * Comparison functions, supporting strings, numbers, arrays and null
+ * 1. For strings the dictionary order of the two will be compared
+ * 2. For numbers will compare the two sizes
+ * 3. The null value is always less than the other value when comparing
+ * 4. For arrays, the elements of the array will be compared one by one, and the first unequal comparison will be the result of the whole array comparison
  */
 export const compare = (x: any, y: any): number => {
   if (x == null || x == NOT_EXIST) {
@@ -185,7 +184,7 @@ export const compare = (x: any, y: any): number => {
       }
     }
 
-    // 数组长度不等时，元素少的字段放在前面
+    // When the array length is unequal, the field with fewer elements is placed first
     return x.length - y.length;
   }
   return (
@@ -194,7 +193,7 @@ export const compare = (x: any, y: any): number => {
   );
 };
 
-// 根据指定的 codes 计算下钻树
+// Calculate the drill-down tree based on the specified codes
 export const buildDrillTree = (
   data: any[],
   codes: string[],
@@ -264,7 +263,7 @@ export const buildDrillTree = (
       }
       path.pop();
     }
-    // 对 行/列维度 进行排序
+    // Sorting the row/column dimensions
     return (
       sortType === SortType.None ? 
         array : 
